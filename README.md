@@ -1,2 +1,2 @@
 # RememberYourPasswords
-An Android app to demonstrate Architecure Components
+An Android app to demonstrate Architecture Components
