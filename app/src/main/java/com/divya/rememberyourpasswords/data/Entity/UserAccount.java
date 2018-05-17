@@ -17,8 +17,14 @@ public class UserAccount {
     public static final String TABLE_NAME = "useraccounts";
 
     @PrimaryKey @NonNull
-    public String userId;
-    private String password;
+    String userId;
+    String password;
+
+    public UserAccount(String username, String pwd)
+    {
+        this.userId = username;
+        this.password = pwd;
+    }
 
     public String getUserId() {
         return userId;
