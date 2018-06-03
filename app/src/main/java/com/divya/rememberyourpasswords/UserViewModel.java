@@ -5,8 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.divya.rememberyourpasswords.data.Db.UserAccountDatabase;
-import com.divya.rememberyourpasswords.data.Entity.UserAccount;
+import com.divya.rememberyourpasswords.data.UserAccountDatabase;
 import com.divya.rememberyourpasswords.data.UserRepository;
 
 /**

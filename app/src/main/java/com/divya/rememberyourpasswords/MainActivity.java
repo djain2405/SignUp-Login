@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,11 +27,30 @@ public class MainActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.login);
         userViewModel = ViewModelProviders.of(this, new UserViewModel.Factory(getApplicationContext())).get(UserViewModel.class);
 
+        Boolean signup = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("signup", true);
+
+        if(signup)
+        {
+            signUpButton.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.GONE);
+        }
+        else
+        {
+            signUpButton.setVisibility(View.GONE);
+            loginButton.setVisibility(View.VISIBLE);
+
+        }
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 userViewModel.createUser(usernameText.getText().toString(), passwordText.getText().toString());
+                getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                        .putBoolean("signup", false).commit();
+                Toast.makeText(getBaseContext(), "Successfully Created An Account!", Toast.LENGTH_LONG).show();
+
+
             }
         });
 
@@ -40,10 +60,12 @@ public class MainActivity extends AppCompatActivity {
                 boolean isValid = userViewModel.checkValidLogin(usernameText.getText().toString(), passwordText.getText().toString());
                 if(isValid)
                 {
+                    Toast.makeText(getBaseContext(), "Successfully Logged In!", Toast.LENGTH_LONG).show();
                     Log.i("Successful_Login", "Login was successful");
                 }
                 else
                 {
+                    Toast.makeText(getBaseContext(), "Invalid Login!", Toast.LENGTH_SHORT).show();
                     Log.i("Unsuccessful_Login", "Login was not successful");
                 }
             }

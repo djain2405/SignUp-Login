@@ -1,9 +1,7 @@
 package com.divya.rememberyourpasswords.data;
 
 import android.arch.lifecycle.LiveData;
-
-import com.divya.rememberyourpasswords.data.Dao.UserAccountDao;
-import com.divya.rememberyourpasswords.data.Entity.UserAccount;
+import android.arch.lifecycle.Transformations;
 
 /**
  * Created by divya on 5/16/2018.
@@ -13,6 +11,7 @@ public class UserRepository {
 
     private final UserAccountDao userAccountDao;
     private static UserRepository instance;
+    private LiveData<UserAccount> userAccountLiveData;
 
     private UserRepository(UserAccountDao userAccountDao)
     {
@@ -28,15 +27,16 @@ public class UserRepository {
         return instance;
     }
 
-    public boolean isValidAccount(String username, String password)
+    public boolean isValidAccount(String username, final String password)
     {
-        LiveData<UserAccount> userAccountLiveData = userAccountDao.getAccount(username);
-        return userAccountLiveData.getValue().getPassword().equals(password);
 
+        UserAccount userAccount = userAccountDao.getAccount(username);
+        return userAccount.getPassword().equals(password);
     }
 
     public void insertUser(String username, String password)
     {
-        userAccountDao.insert(new UserAccount(username, password));
+        UserAccount account = new UserAccount(username, password);
+        userAccountDao.insert(account);
     }
 }
