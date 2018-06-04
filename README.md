@@ -4,4 +4,4 @@ The code is written using the Android Architecture Components in the following p
 
 **LifeCycleOwner(Activity) -> ViewModel -> Repository -> Database using Room Library**
 
-Kotlin version coming soon!
+
