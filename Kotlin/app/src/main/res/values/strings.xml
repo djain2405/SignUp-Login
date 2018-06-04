@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SignUp-Login-Kotlin</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+</resources>
